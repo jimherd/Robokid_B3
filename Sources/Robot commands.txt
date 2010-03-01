@@ -1,0 +1,42 @@
+Set of robot commands
+=====================
+
+Notes.
+
+1.  stack entries are named : a=top entry, b=2nd top entry, c=3rd top entry
+2.  data pushed on in order c->b->a
+
+
+Command         mode       a            b        c                  notes   
+       
+PUSH_16         IMM/REG  result         -        -      push 16-bit value onto stack
+PUSH_L8         IMM/REG  result         -        -      push 8-bit value onto stack
+PUSH_H8         IMM/REG  result         -        -      push 8-bit value onto stack (upper 8-bits)
+POP_8              -     value          -        -      pop top entry as 8-bit value
+POP_16,            -     value          -        -      pop top entry as 16-bit value
+SET_PARAMETER      -   distance         -        -      set distance parameter
+SET_PARAMETER      -     time           -        -      set time parameter
+SET_PARAMETER      -     motor      direction  speed    set motor parameters
+COMPUTE            -   value/result   value      -      add : a = a + b
+GOTO      ABS/REL+/REL-    -            -        -      goto location is in command
+EXECUTE            -       -            -        -      execute move SRTAT/STOP/TIMED/DISTANCE
+DEC_AND_SKIP       -       -            -        -      gecrement a variable and skip next inst if zero
+TEST_AND_SKIP            value        value      -      a==b, a<b, a>b
+READ_CHAN  IMM/STK   channel/result     -        -      a loaded with channel reading
+DELAY           IMM/STK  value          -        -      IMM=delay nos 0.1 secs, STK=delay nos 8mS 
+EXIT                       -            -        -      exit from sequence
+
+Encoder disk
+
+1. 36 pulses per revolution
+2. diameter of wheel = 7.5cm   -> circum = 23.56cm 
+3. -> distance per pulse = 0.6545cm   -> 1cm = 1.528 pulses  
+4. n cm = (n * 1.528)pulses    -.  pulses = (n * 153)/100;
+
+Spin calculations
+
+1. distance between the centres of the two wheels is 13.3cm (approx)
+2. -> circumference of turning circle = 41.78cm
+3. -> 90deg = 41.78/4 = 10.446cm  =  16.2 pulses (use 16 pulses)
+4. -> 30deg = 3.48cm  = 5.394 pulses
+5. -> 45deg = 5.223cm = 8.1 pulses (use 8 pulses)
