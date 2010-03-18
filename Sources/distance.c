@@ -42,8 +42,8 @@ uint8_t   activity;
             WAIT_SWITCH_RELEASED(switch_D);
             activity++;
             SOUND_NEXT_SELECTION;
-            if (activity > LAST_PROGRAM_MODE) {
-                activity = FIRST_PROGRAM_MODE;
+            if (activity > LAST_DISTANCE_MODE) {
+                activity = FIRST_DISTANCE_MODE;
             }
             show_dual_chars(DISTANCE_MODE_CODE, ('0'+ activity), (A_TO_FLASH | 10));
         }
